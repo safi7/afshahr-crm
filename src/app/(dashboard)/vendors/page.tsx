@@ -38,6 +38,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import CancelIcon from '@mui/icons-material/Cancel';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import AddIcon from '@mui/icons-material/Add';
+import MapIcon from '@mui/icons-material/Map';
+import NextLink from 'next/link';
 import { PageHeader } from '@/components/PageHeader';
 import { ConfirmDialog } from '@/components/shared/ConfirmDialog';
 import { formatDateShort, vendorStatusColor, vendorStatusLabel } from '@/lib/helpers';
@@ -229,9 +231,14 @@ export default function VendorsPage() {
         subtitle="Manage store applications and account status"
         breadcrumbs={[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Vendors' }]}
         actions={
-          <Button variant="contained" startIcon={<AddIcon />} onClick={() => setCreateOpen(true)}>
-            Add Vendor
-          </Button>
+          <Box sx={{ display: 'flex', gap: 1 }}>
+            <Button component={NextLink} href="/vendors/map" variant="outlined" startIcon={<MapIcon />}>
+              Map
+            </Button>
+            <Button variant="contained" startIcon={<AddIcon />} onClick={() => setCreateOpen(true)}>
+              Add Vendor
+            </Button>
+          </Box>
         }
       />
 

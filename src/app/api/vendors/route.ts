@@ -88,6 +88,10 @@ export async function POST(request: NextRequest) {
 
   if (insertError) {
     if (insertError.code === '23505') {
+      const detail = (insertError.details ?? insertError.message ?? '').toLowerCase();
+      if (detail.includes('username')) {
+        return NextResponse.json({ error: 'This username is already taken' }, { status: 409 });
+      }
       return NextResponse.json({ error: 'A vendor with this email already exists' }, { status: 409 });
     }
     return NextResponse.json({ error: 'Failed to create vendor' }, { status: 500 });

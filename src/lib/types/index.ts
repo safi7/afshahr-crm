@@ -24,6 +24,8 @@ export interface Vendor {
   address: string | null;
   description: string | null;
   status: VendorStatus;
+  latitude: number | null;
+  longitude: number | null;
   rejection_reason: string | null;
   confirmed_by: string | null;
   confirmed_at: string | null;

@@ -66,6 +66,13 @@ export async function POST(request: NextRequest) {
 
   if (error) {
     if (error.code === '23505') {
+      const detail = (error.details ?? error.message ?? '').toLowerCase();
+      if (detail.includes('username')) {
+        return NextResponse.json({ error: 'This username is already taken' }, { status: 409 });
+      }
+      if (detail.includes('email')) {
+        return NextResponse.json({ error: 'This email is already registered' }, { status: 409 });
+      }
       return NextResponse.json({ error: 'Username or email already exists' }, { status: 409 });
     }
     return NextResponse.json({ error: 'Failed to create admin' }, { status: 500 });
